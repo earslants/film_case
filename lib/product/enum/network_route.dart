@@ -1,0 +1,9 @@
+enum NetworkRoutes {
+  LOGIN,
+  REGISTER,
+  PROFILE,
+  UPLOAD_PHOTO,
+  MOVIES,
+  FAVORITES,
+  FAVORITE,
+}
