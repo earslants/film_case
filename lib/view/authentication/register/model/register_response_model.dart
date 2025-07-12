@@ -6,10 +6,10 @@ part 'register_response_model.g.dart';
 
 @JsonSerializable()
 class RegisterResponseModel {
-  ResponseModel? response;
-  UserData? data;
+  ResponseModel response;
+  UserData data;
 
-  RegisterResponseModel({this.response, this.data});
+  RegisterResponseModel({required this.response, required this.data});
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseModelFromJson(json);

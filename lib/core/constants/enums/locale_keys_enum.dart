@@ -3,4 +3,5 @@ enum PreferencesKeys {
   USERNAME,
   PASSWORD,
   IS_FIRST_APP,
+  LOCALE_KEY,
 }

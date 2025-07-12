@@ -16,11 +16,15 @@ class RegisterService extends IRegisterService {
       RegisterRequestModel registerModel) async {
     NetworkManager.instance.setContext(context!);
     try {
+      print("ÇALIŞTI");
       final response = await NetworkManager.instance
           .dioPost(NetworkRoutes.REGISTER.rawValue, registerModel);
 
       if (response != null) {
+        print("RESPONSE $response");
         return RegisterResponseModel.fromJson(response);
+      } else {
+        print("RESPONSE NULL");
       }
     } catch (e) {
       print("Bir hata Oluştu");

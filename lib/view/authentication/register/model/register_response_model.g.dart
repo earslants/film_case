@@ -9,12 +9,9 @@ part of 'register_response_model.dart';
 RegisterResponseModel _$RegisterResponseModelFromJson(
         Map<String, dynamic> json) =>
     RegisterResponseModel(
-      response: json['response'] == null
-          ? null
-          : ResponseModel.fromJson(json['response'] as Map<String, dynamic>),
-      data: json['data'] == null
-          ? null
-          : UserData.fromJson(json['data'] as Map<String, dynamic>),
+      response:
+          ResponseModel.fromJson(json['response'] as Map<String, dynamic>),
+      data: UserData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RegisterResponseModelToJson(

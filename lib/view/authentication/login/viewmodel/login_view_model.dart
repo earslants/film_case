@@ -9,7 +9,7 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({
     required ILoginService loginService,
   })  : _loginService = loginService,
-        super(const LoginState(isLoading: false));
+        super(const LoginState(isLoading: false, isSuccess: false));
 
   final ILoginService _loginService;
 
@@ -18,20 +18,27 @@ class LoginViewModel extends Cubit<LoginState> {
   }
 
   Future<void> fetchLogin(LoginRequestModel loginRequestModel) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(
+        isLoading: true, isSuccess: false)); // her login denemesinde resetle
 
     final response = await _loginService.fetchLogin(loginRequestModel);
 
     if (response != null) {
-      LocaleManager.instance.setStringValue(
-          PreferencesKeys.TOKEN, "Bearer ${response.data.token}");
+      await LocaleManager.instance.setStringValue(
+        PreferencesKeys.TOKEN,
+        "Bearer ${response.data.token}",
+      );
+
       emit(state.copyWith(
         isLoading: false,
         loginResponseModel: response,
+        isSuccess: true,
       ));
     } else {
-      emit(state.copyWith(isLoading: false));
-      // TODO: hata durumunu da state ile yönet
+      emit(state.copyWith(
+        isLoading: false,
+        isSuccess: false,
+      ));
     }
   }
 }

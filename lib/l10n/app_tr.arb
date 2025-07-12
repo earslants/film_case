@@ -5,5 +5,16 @@
   "forgotPassword": "Şifremi unuttum",
   "login": "Giriş Yap",
   "noAccount": "Bir hesabın yok mu?",
-  "registerNow": "Kayıt Ol!"
+  "registerNow": "Kayıt Ol!",
+  "registerWelcome": "Hoşgeldiniz",
+  "fullName": "Ad Soyad",
+  "email": "E-Posta",
+  "password": "Şifre",
+  "passwordAgain": "Şifre Tekrar",
+  "agreeTerms": "Kullanıcı sözleşmesini ",
+  "agreeAndAccept": "okudum ve kabul ediyorum.",
+  "continueAgreement": " Bu sözleşmeyi okuyarak devam ediniz lütfen.",
+  "registerButton": "Şimdi Kaydol",
+  "alreadyHaveAccount": "Zaten bir hesabın var mı?",
+  "goToLogin": "Giriş Yap!"
 }

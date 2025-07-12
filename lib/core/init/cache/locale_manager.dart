@@ -41,6 +41,10 @@ class LocaleManager {
     await _preferences!.setBool(key.toString(), value);
   }
 
+  Future<void> removeValue(PreferencesKeys key) async {
+    await _preferences?.remove(key.toString());
+  }
+
   String getStringValue(PreferencesKeys key) =>
       _preferences?.getString(key.toString()) ?? '';
 

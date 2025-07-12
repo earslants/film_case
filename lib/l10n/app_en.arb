@@ -1,9 +1,20 @@
 {
   "@@locale": "en",
-  "welcomeTitle": "Welcome",
-  "welcomeDescription": "Welcome to our app! You can choose and watch the movies you like here.",
+  "welcomeTitle": "Hello",
+  "welcomeDescription": "Welcome to our app! You can select and watch the movies you want from here.",
   "forgotPassword": "Forgot Password",
   "login": "Login",
   "noAccount": "Don't have an account?",
-  "registerNow": "Register Now!"
+  "registerNow": "Register Now!",
+  "registerWelcome": "Welcome",
+  "fullName": "Full Name",
+  "email": "Email",
+  "password": "Password",
+  "passwordAgain": "Confirm Password",
+  "agreeTerms": "I have read and agree to the ",
+  "agreeAndAccept": "User Agreement.",
+  "continueAgreement": " Please read this agreement before continuing.",
+  "registerButton": "Register Now",
+  "alreadyHaveAccount": "Already have an account?",
+  "goToLogin": "Login!"
 }

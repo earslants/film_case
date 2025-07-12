@@ -1,7 +1,13 @@
+import 'package:case_film_app/core/init/navigation/navigation_route.dart';
+import 'package:case_film_app/core/init/navigation/navigation_service.dart';
+import 'package:case_film_app/core/init/notifier/global_notifier.dart';
+import 'package:case_film_app/core/init/notifier/provider_list.dart';
 import 'package:case_film_app/view/authentication/login/view/login_view.dart';
+import 'package:case_film_app/view/authentication/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,25 +18,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Film App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [...ApplicationProvider.instance.dependItems],
+      child: Consumer<GlobalNotifier>(
+        builder: (context, globalNotifier, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Film App',
+            navigatorKey: NavigationService.instance.navigatorKey,
+            onGenerateRoute: NavigationRoute.instance.generateRoute,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('tr', 'TR'), // Turkish
+              Locale('en', 'US'), // English
+            ],
+            locale: globalNotifier.locale,
+            home: const SplashView(),
+          );
+        },
       ),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('tr'),
-      ],
-      locale: Locale('tr'),
-      home: const LoginView(),
     );
   }
 }
