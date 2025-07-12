@@ -1,0 +1,9 @@
+{
+  "@@locale": "tr",
+  "welcomeTitle": "Merhabalar",
+  "welcomeDescription": "Uygulamamıza hoşgeldin! Buradan istediğin filmleri seçip izleyebilirsin.",
+  "forgotPassword": "Şifremi unuttum",
+  "login": "Giriş Yap",
+  "noAccount": "Bir hesabın yok mu?",
+  "registerNow": "Kayıt Ol!"
+}

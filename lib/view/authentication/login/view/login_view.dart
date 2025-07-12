@@ -1,14 +1,11 @@
 import 'package:case_film_app/core/base/state/base_state.dart';
 import 'package:case_film_app/view/authentication/login/model/login_request_model.dart';
-import 'package:case_film_app/view/authentication/login/model/login_response_model.dart';
-import 'package:case_film_app/view/authentication/login/service/login_service.dart';
 import 'package:case_film_app/view/authentication/login/viewmodel/login_view_model.dart';
 import 'package:case_film_app/view/authentication/login/viewmodel/mixin/login_mixin.dart';
 import 'package:case_film_app/view/authentication/login/viewmodel/state/login_state.dart';
-import 'package:case_film_app/view/authentication/register/model/register_request_model.dart';
-import 'package:case_film_app/view/authentication/register/service/register_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -20,22 +17,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
   @override
   Widget build(BuildContext context) {
-    // return BlocProvider(
-    //   create: (context) => loginViewModel,
-    //   child: Center(
-    //     child: BlocBuilder<LoginViewModel, LoginState>(
-    //       builder: (context, state) {
-    //         return ElevatedButton(
-    //           onPressed: () => loginViewModel.fetchLogin(
-    //             LoginRequestModel(
-    //                 email: "ea12345@gmail.com", password: "123456"),
-    //           ),
-    //           child: Text("EMAIL: ${state.loginResponseModel?.data.email}"),
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocProvider(
       create: (context) => loginViewModel,
       child: Scaffold(
@@ -54,7 +37,7 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                 child: Column(
                   children: [
                     Text(
-                      "Merhabalar",
+                      l10n.welcomeTitle,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
@@ -63,7 +46,7 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                     ),
                     SizedBox(height: dynamicHeight(.01)),
                     Text(
-                      "Tempus varius a vitae interdum id tortor elementum tristique eleifend at.",
+                      l10n.welcomeDescription,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -91,7 +74,7 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                         ),
                         SizedBox(height: dynamicHeight(.03)),
                         Text(
-                          "Şifremi unuttum",
+                          l10n.forgotPassword,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.white,
@@ -101,7 +84,7 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                         SizedBox(height: dynamicHeight(.03)),
                         GestureDetector(
                           onTap: () {
-                            loginViewModel.changeLoading();
+                            // loginViewModel.changeLoading();
                             loginViewModel.fetchLogin(
                               LoginRequestModel(
                                 email: emailController.text,
@@ -125,7 +108,7 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                                     );
                                   }
                                   return Text(
-                                    "Giriş Yap",
+                                    l10n.login,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
@@ -158,15 +141,16 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Bir hesabın yok mu? ",
+                              l10n.noAccount,
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
                                 color: Colors.white.withOpacity(.5),
                               ),
                             ),
+                            SizedBox(width: dynamicWidth(.01)),
                             Text(
-                              "Kayıt Ol!",
+                              l10n.registerNow,
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,

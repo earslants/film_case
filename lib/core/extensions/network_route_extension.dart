@@ -1,5 +1,4 @@
 import 'package:case_film_app/product/enum/network_route.dart';
-import 'package:flutter/material.dart';
 
 extension NetworkRoutesString on NetworkRoutes {
   String get rawValue {

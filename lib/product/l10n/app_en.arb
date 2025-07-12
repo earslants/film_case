@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "welcomeTitle": "Welcome",
+  "welcomeDescription": "Welcome to our app! You can choose and watch the movies you like here.",
+  "forgotPassword": "Forgot Password",
+  "login": "Login",
+  "noAccount": "Don't have an account?",
+  "registerNow": "Register Now!"
+}
