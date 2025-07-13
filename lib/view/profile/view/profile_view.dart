@@ -25,6 +25,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileViewMixin {
         appBar: AppBar(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
+          centerTitle: true,
           title: Text(
             "Profil Detayı",
             style: TextStyle(

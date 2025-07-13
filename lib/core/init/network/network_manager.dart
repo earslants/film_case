@@ -101,6 +101,37 @@ class NetworkManager extends BaseNetworkManager {
     }
   }
 
+  Future<dynamic> dioPostFormData({
+    required String path,
+    required FormData formData,
+  }) async {
+    try {
+      final response = await _dio!.post(
+        path,
+        data: formData,
+        options: Options(
+          contentType: 'multipart/form-data',
+          headers: {
+            'Authorization':
+                localeManager.getStringValue(PreferencesKeys.TOKEN),
+          },
+        ),
+      );
+
+      switch (response.statusCode) {
+        case HttpStatus.ok:
+        case HttpStatus.created:
+          return response.data;
+        default:
+          return null;
+      }
+    } catch (e, stack) {
+      print("FormData POST Hatası: $e");
+      print("STACK: $stack");
+      return null;
+    }
+  }
+
   Future dioPut<T extends BaseModel>(String path, T model) async {
     final response = await _dio!.put(path, data: model);
     switch (response.statusCode) {

@@ -39,7 +39,6 @@ class ProfileViewModel extends Cubit<ProfileState> {
     final response = await _profileService.uploadPhoto(fileName);
 
     if (response != null) {
-      print("PHOTO URL: ${response.data.photoUrl}");
       emit(state.copyWith(
         profileModel: response,
       ));

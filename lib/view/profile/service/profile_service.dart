@@ -4,6 +4,7 @@ import 'package:case_film_app/core/constants/enums/locale_keys_enum.dart';
 import 'package:case_film_app/core/constants/navigation/navigation_constants.dart';
 import 'package:case_film_app/core/extensions/network_route_extension.dart';
 import 'package:case_film_app/core/init/cache/locale_manager.dart';
+import 'package:case_film_app/core/init/navigation/navigation_service.dart';
 import 'package:case_film_app/core/init/network/network_manager.dart';
 import 'package:case_film_app/product/enum/network_route.dart';
 import 'package:case_film_app/view/profile/model/favorite_model.dart';
@@ -49,38 +50,23 @@ class ProfileService extends IProfileService {
 
   @override
   Future<ProfileModel?> uploadPhoto(File imageFile) async {
-    final dio = Dio();
-
-    final String url = "https://caseapi.servicelabs.tech/user/upload_photo";
-
     try {
-      String fileName = imageFile.path;
-
-      // FormData oluştur
       FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(
-          imageFile.path,
-          filename: fileName,
-        ),
+        "file": await MultipartFile.fromFile(imageFile.path),
       });
 
-      // İstek gönder
-      final response = await dio.post(
-        url,
-        data: formData,
-        options: Options(
-          headers: {
-            "Authorization":
-                LocaleManager.instance.getStringValue(PreferencesKeys.TOKEN),
-            // "Content-Type" manuel ekleme, Dio bunu otomatik ayarlıyor!
-          },
-        ),
+      final response = await NetworkManager.instance.dioPostFormData(
+        path: "/user/upload_photo", // ya da NetworkRoutes.UPLOAD_PHOTO.rawValue
+        formData: formData,
       );
 
-      print("Yükleme başarılı: ${response.data}");
-    } on DioException catch (e) {
-      print("Yükleme hatası: ${e.response?.data ?? e.message}");
+      if (response != null) {
+        return ProfileModel.fromJson(response);
+      }
+    } catch (e) {
+      print("Yükleme hatası: $e");
     }
+
     return null;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:case_film_app/view/authentication/login/model/response_model.dart';
 import 'package:case_film_app/view/authentication/login/model/user_data.dart';
+import 'package:case_film_app/view/profile/model/profile_response_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile_model.g.dart';
@@ -7,7 +8,7 @@ part 'profile_model.g.dart';
 @JsonSerializable()
 class ProfileModel {
   ResponseModel response;
-  UserData data;
+  ProfileResponseData data;
 
   ProfileModel({required this.response, required this.data});
 
