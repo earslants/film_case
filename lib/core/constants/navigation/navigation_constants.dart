@@ -5,4 +5,5 @@ class NavigationConstants {
   static const REGISTER = '/register';
   static const AUTHGATE = '/authGate';
   static const HOME = '/home';
+  static const PROFILE = '/profile';
 }

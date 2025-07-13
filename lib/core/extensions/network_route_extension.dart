@@ -15,7 +15,7 @@ extension NetworkRoutesString on NetworkRoutes {
         return "/movie/list";
       case NetworkRoutes.FAVORITES:
         return "/movie/favorites";
-      case NetworkRoutes.FAVORITE:
+      case NetworkRoutes.ADD_FAVORITE:
         return "/movie/favorite/{favoriteId}";
     }
   }

@@ -5,5 +5,5 @@ enum NetworkRoutes {
   UPLOAD_PHOTO,
   MOVIES,
   FAVORITES,
-  FAVORITE,
+  ADD_FAVORITE,
 }

@@ -4,6 +4,7 @@ import 'package:case_film_app/view/authentication/login/view/login_view.dart';
 import 'package:case_film_app/view/authentication/register/view/register_view.dart';
 import 'package:case_film_app/view/authentication/splash/splash_view.dart';
 import 'package:case_film_app/view/home.dart';
+import 'package:case_film_app/view/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class NavigationRoute {
@@ -25,7 +26,8 @@ class NavigationRoute {
         return normalNavigate(const AuthGate(), NavigationConstants.AUTHGATE);
       case NavigationConstants.HOME:
         return normalNavigate(const ExploreView(), NavigationConstants.HOME);
-
+      case NavigationConstants.PROFILE:
+        return normalNavigate(const ProfileView(), NavigationConstants.PROFILE);
       default:
         return notFoundNavigate();
     }
