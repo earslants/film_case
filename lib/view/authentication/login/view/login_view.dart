@@ -59,26 +59,31 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                 Expanded(
                   flex: 65,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        l10n.welcomeTitle,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                        ),
+                      Column(
+                        children: [
+                          Text(
+                            l10n.welcomeTitle,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                          ),
+                          SizedBox(height: dynamicHeight(.01)),
+                          Text(
+                            l10n.welcomeDescription,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: dynamicHeight(.01)),
-                      Text(
-                        l10n.welcomeDescription,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300,
-                          fontSize: 13,
-                        ),
-                      ),
-                      SizedBox(height: dynamicHeight(.04)),
+                      SizedBox(height: dynamicHeight(.02)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -161,37 +166,38 @@ class _LoginViewState extends BaseState<LoginView> with LoginViewMixin {
                               ),
                             ],
                           ),
-                          SizedBox(height: dynamicHeight(.04)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                l10n.noAccount,
+                        ],
+                      ),
+                      SafeArea(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              l10n.noAccount,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                color: Colors.white.withOpacity(.5),
+                              ),
+                            ),
+                            SizedBox(width: dynamicWidth(.01)),
+                            GestureDetector(
+                              onTap: () {
+                                NavigationService.instance.navigateToPage(
+                                  path: NavigationConstants.REGISTER,
+                                );
+                              },
+                              child: Text(
+                                l10n.registerNow,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12,
-                                  color: Colors.white.withOpacity(.5),
+                                  color: Colors.white,
                                 ),
                               ),
-                              SizedBox(width: dynamicWidth(.01)),
-                              GestureDetector(
-                                onTap: () {
-                                  NavigationService.instance.navigateToPage(
-                                    path: NavigationConstants.REGISTER,
-                                  );
-                                },
-                                child: Text(
-                                  l10n.registerNow,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

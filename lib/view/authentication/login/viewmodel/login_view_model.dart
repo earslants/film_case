@@ -28,7 +28,6 @@ class LoginViewModel extends Cubit<LoginState> {
         PreferencesKeys.TOKEN,
         "Bearer ${response.data.token}",
       );
-
       emit(state.copyWith(
         isLoading: false,
         loginResponseModel: response,

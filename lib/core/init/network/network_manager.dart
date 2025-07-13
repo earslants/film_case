@@ -20,13 +20,14 @@ class NetworkManager extends BaseNetworkManager {
   String? url;
 
   NetworkManager._init() {
+    print("base url: $BASE_URL");
+    print("TOKEN: ${localeManager.getStringValue(PreferencesKeys.TOKEN)}");
     url = BASE_URL;
     final baseOptions = BaseOptions(
       baseUrl: BASE_URL,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            "Bearer ${localeManager.getStringValue(PreferencesKeys.TOKEN)}"
+        'Authorization': localeManager.getStringValue(PreferencesKeys.TOKEN)
       },
     );
 
@@ -37,26 +38,22 @@ class NetworkManager extends BaseNetworkManager {
           localeManager.getStringValue(PreferencesKeys.TOKEN);
 
       handler.next(options);
-    }, onResponse: ((e, handler) {
-      final data = e.data;
+    }, onResponse: (e, handler) {
       switch (e.statusCode) {
         case 401:
-          // NavigationService.instance
-          //     .navigateToPageClear(path: NavigationConstants.LOGIN);
-
+          // opsiyonel yönlendirme
           break;
         case 404:
-          // ScaffoldMessenger.of(_context).showSnackBar(SnackBar(
-          //   content: Text('Hata!'),
-          //   duration: Duration(seconds: 3),
-          // ));
           handler.reject(DioException(
-              requestOptions: RequestOptions(path: e.realUri.path)));
-          return;
+            requestOptions: e.requestOptions,
+            response: e,
+          ));
+          return; // early return
         default:
+          break;
       }
-      handler.next(e);
-    }), onError: (DioException e, handler) async {
+      handler.next(e); // ❗ bu mutlaka olmalı
+    }, onError: (DioException e, handler) async {
       if (e.response != null) {
         if (e.response?.statusCode == 401) {
           // NavigationService.instance
@@ -67,23 +64,31 @@ class NetworkManager extends BaseNetworkManager {
       }
     }));
   }
+  Future dioGet({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    print("Dio get çağırıldı");
+    try {
+      final response = await _dio!.get(path, queryParameters: queryParameters);
+      print("Status Code: ${response.statusCode}");
 
-  Future dioGet(
-      {required String path, Map<String, dynamic>? queryParameters}) async {
-    final response = await _dio!.get(path, queryParameters: queryParameters);
-
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final responseBody = response.data;
-        return responseBody;
-      default:
-        return null;
+      switch (response.statusCode) {
+        case HttpStatus.ok:
+          final responseBody = response.data;
+          return responseBody;
+        default:
+          return null;
+      }
+    } catch (e, stack) {
+      print("Dio HATA: $e");
+      print("STACK: $stack");
+      return null;
     }
   }
 
   Future dioPost<T extends BaseModel>(String path, T model) async {
     final response = await _dio!.post(path, data: model);
-    print("Response");
     switch (response.statusCode) {
       case HttpStatus.ok:
         final responseBody = response.data;

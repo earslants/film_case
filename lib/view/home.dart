@@ -2,6 +2,7 @@ import 'package:case_film_app/core/constants/enums/locale_keys_enum.dart';
 import 'package:case_film_app/core/init/cache/locale_manager.dart';
 import 'package:case_film_app/view/authentication/auth_gate/auth_gate.dart';
 import 'package:case_film_app/view/authentication/splash/splash_view.dart';
+import 'package:case_film_app/view/explore/service/explore_service.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,14 +15,24 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    ExploreService exploreService = ExploreService(context: context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            LocaleManager.instance.removeValue(PreferencesKeys.TOKEN);
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (_) => const AuthGate()),
-                (route) => false);
+          onPressed: () async {
+            // LocaleManager.instance.removeValue(PreferencesKeys.TOKEN);
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(builder: (_) => const AuthGate()),
+            //     (route) => false);
+
+            final response = await exploreService.fetchAllMovies();
+
+            if (response != null) {
+              for (var movie in response.data.movies) {
+                print("RESPONSE: ${movie.imdbId}");
+              }
+            }
           },
           icon: Icon(
             Icons.logout,
