@@ -1,5 +1,5 @@
-import 'package:case_film_app/view/explore/model/movie_model.dart';
-import 'package:case_film_app/view/explore/model/pagination_model.dart';
+import 'package:case_film_app/view/home/model/movie_model.dart';
+import 'package:case_film_app/view/home/model/pagination_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_data_model.g.dart';

@@ -4,7 +4,7 @@ import 'package:case_film_app/core/init/cache/locale_manager.dart';
 import 'package:case_film_app/core/init/network/network_manager.dart';
 import 'package:case_film_app/product/enum/network_route.dart';
 import 'package:dio/dio.dart';
-import 'package:case_film_app/view/explore/model/movies.dart';
+import 'package:case_film_app/view/home/model/movies.dart';
 import 'package:case_film_app/view/explore/service/IExploreService.dart';
 import 'package:flutter/material.dart';
 

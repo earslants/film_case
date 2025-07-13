@@ -24,7 +24,7 @@ class NavigationRoute {
       case NavigationConstants.AUTHGATE:
         return normalNavigate(const AuthGate(), NavigationConstants.AUTHGATE);
       case NavigationConstants.HOME:
-        return normalNavigate(const HomeView(), NavigationConstants.HOME);
+        return normalNavigate(const ExploreView(), NavigationConstants.HOME);
 
       default:
         return notFoundNavigate();

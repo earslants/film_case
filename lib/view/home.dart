@@ -1,18 +1,14 @@
-import 'package:case_film_app/core/constants/enums/locale_keys_enum.dart';
-import 'package:case_film_app/core/init/cache/locale_manager.dart';
-import 'package:case_film_app/view/authentication/auth_gate/auth_gate.dart';
-import 'package:case_film_app/view/authentication/splash/splash_view.dart';
 import 'package:case_film_app/view/explore/service/explore_service.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class ExploreView extends StatefulWidget {
+  const ExploreView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<ExploreView> createState() => _ExploreViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _ExploreViewState extends State<ExploreView> {
   @override
   Widget build(BuildContext context) {
     ExploreService exploreService = ExploreService(context: context);
