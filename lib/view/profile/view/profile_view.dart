@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:case_film_app/view/profile/viewmodel/mixin/profile_mixin.dart';
 import 'package:case_film_app/view/profile/viewmodel/profile_view_model.dart';
 import 'package:case_film_app/view/profile/viewmodel/state/profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProfileView extends StatefulWidget {
@@ -126,33 +129,65 @@ class _ProfileViewState extends State<ProfileView> with ProfileViewMixin {
                   children: [
                     // Profil Bilgileri
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CircleAvatar(
-                          radius: 36,
-                          backgroundImage:
-                              NetworkImage(profile?.data.photoUrl ?? ""),
-                        ),
-                        const SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Text(
-                              profile?.data.name ?? "-",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            CircleAvatar(
+                              radius: 36,
+                              backgroundImage:
+                                  NetworkImage(profile?.data.photoUrl ?? ""),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "ID: ${profile?.data.id ?? '-'}",
-                              style: TextStyle(
-                                color: Colors.white54,
-                                fontSize: 14,
-                              ),
+                            const SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  profile?.data.name ?? "-",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  "ID: ${profile?.data.id != null && profile!.data.id.length > 6 ? '${profile.data.id.substring(0, 6)}...' : profile?.data.id ?? '-'}",
+                                  style: TextStyle(
+                                    color: Colors.white54,
+                                    fontSize: 14,
+                                  ),
+                                )
+                              ],
                             ),
                           ],
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            final ImagePicker imagePicker = ImagePicker();
+                            var image = await imagePicker.pickImage(
+                                source: ImageSource.gallery);
+
+                            if (image != null) {
+                              profileViewModel.uploadPhoto(File(image.path));
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFE50914),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text(
+                              "Fotoğraf Ekle",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
